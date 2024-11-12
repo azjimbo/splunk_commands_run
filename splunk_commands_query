@@ -1,8 +1,6 @@
 index=_audit   ```not everyone has access to this index out of the box - there is also a datamodel that might work too - I'm playing with that```
-action=search
-user IN("*") ```<--put your target user in here```
-NOT search IN("'|history |head 2000*" , "'typeahead*","*dedup search*","*dedup search*","'rt_*", "'admin_*", "*scheduler__admin*")
-```these excludes might be specific to my deployment - feel free to play with them and see what pops out```
+action=search provenance="UI:Search"   ```<- change that to see results from dashboards and other search sources```
+user IN("*")   ```<--put a target user in here```
 NOT user IN ("splunk-system-user")
 | makemv delim="|" search
 | mvexpand search
