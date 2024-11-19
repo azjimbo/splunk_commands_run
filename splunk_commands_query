@@ -7,8 +7,8 @@ NOT user IN ("splunk-system-user")
 | eval sample_search=(search)
 | makemv delim="|" search
 | mvexpand search
-| rex field=search "(?<command>\w+)\s"
-| stats max(search_len) as max_search_length min(search_len) as min_search_length max(pipe_count) as max_number_of_commands_in_search dc(sample_search) as searches_w_command last(sample_search) as sample_search count by user command
+| rex field=search "(?<spl_command>\w+)\s"
+| stats max(search_len) as max_search_length min(search_len) as min_search_length max(pipe_count) as max_number_of_commands_in_search dc(sample_search) as searches_w_command last(sample_search) as sample_search count by user spl_command
 | sort 0 - count
 
 ```very much a work in progress```
